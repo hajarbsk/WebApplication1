@@ -1,0 +1,36 @@
+﻿@page
+@model formModel
+@{
+    ViewData["Title"] = "Nouvelle Demande";
+}
+
+<form method="post">
+    <div>
+        <label>Longueur (m):</label>
+        <input type="number" name="length" required />
+    </div>
+    <div>
+        <label>Largeur (m):</label>
+        <input type="number" name="width" required />
+    </div>
+    <div>
+        <label>Type de couvre-plancher:</label>
+        <select name="type">
+            <option value="carrelage">Carrelage</option>
+            <option value="parquet">Parquet</option>
+        </select>
+    </div>
+    <button type="submit">Soumettre</button>
+    </div>
+</form>
+
+
+@if (Model.HasData)
+{
+    <h3>Détails de la demande :</h3>
+    <p>Superficie : @Model.Area m²</p>
+    <p>Type de couvre-plancher : @Model.FloorType</p>
+    <p>Coût des matériaux : @Model.MaterialCost €</p>
+    <p>Coût d'installation : @Model.InstallationCost €</p>
+    <p>Total (avec taxes 15%) : @Model.TotalCost €</p>
+}

@@ -1,0 +1,49 @@
+﻿@page
+@model WebApplication1.Pages.ListeProductsModel
+@{
+    ViewData["Title"] = "Nouvelle Demande - Plancher Expert";
+}
+
+<h1>Nouvelle Demande - Liste des Produits</h1>
+<div class="container">
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Request.Length" class="form-label">Longueur (m)</label>
+            <input asp-for="Request.Length" type="number" class="form-control" required step="0.01" />
+            <span asp-validation-for="Request.Length" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Request.Width" class="form-label">Largeur (m)</label>
+            <input asp-for="Request.Width" type="number" class="form-control" required step="0.01" />
+            <span asp-validation-for="Request.Width" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Request.FloorType" class="form-label">Type de couvre-plancher</label>
+            <select asp-for="Request.FloorType" class="form-select" required>
+                <option value="">Sélectionnez un type</option>
+                <option value="tapis-commercial">Tapis commercial</option>
+                <option value="tapis-qualite">Tapis de qualité</option>
+                <option value="plancher-bois-franc">Plancher bois franc</option>
+                <option value="plancher-flottant">Plancher flottant</option>
+                <option value="ceramique">Céramique</option>
+            </select>
+            <span asp-validation-for="Request.FloorType" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+    </form>
+
+    @if (Model.HasData)
+    {
+        <div class="mt-4">
+            <h3>Détails de la facture :</h3>
+            <p>Superficie : @Model.Invoice.Area m²</p>
+            <p>Coût des matériaux : @Model.Invoice.MaterialCost $</p>
+            <p>Coût d'installation : @Model.Invoice.LaborCost $</p>
+            <p>Total (avec taxes 15%) : @Model.Invoice.Total $</p>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
